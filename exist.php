@@ -2,7 +2,8 @@
 require_once("common/common.php");
 error_log('['.basename(__FILE__).':'.__LINE__.']'."start");
 // dd コマンドに USR1 シグナルを送る
-$result = `sudo pkill -USR1 -f dd`;
+#$result = `sudo pkill -USR1 -f dd`;
+$result = `sudo pkill -USR1 dd`;
 sleep(1);
 // dd.backup.log ファイルの存在確認
 #$dd_backup_file_exist = `if [ -e /boot/log/dd.backup.log ]; then echo "yes"; else echo "no"; fi`;

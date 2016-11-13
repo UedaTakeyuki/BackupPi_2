@@ -59,9 +59,9 @@ function show_html_head($title) {
 <!--	<link rel="stylesheet" href="../common/jquery.mobile-1.3.2.min.css" />
 	<script src="../common/jquery-1.11.3.min.js"></script>
 	<script src="../common/jquery.mobile-1.3.2.min.js"></script> -->
-	<link rel="stylesheet" href="../common/jquery.mobile-1.4.5.min.css" />
-	<script src="../common/jquery-2.2.0.min.js"></script>
-	<script src="../common/jquery.mobile-1.4.5.min.js"></script>
+	<link rel="stylesheet" href="./common/jquery.mobile-1.4.5.min.css" />
+	<script src="./common/jquery-2.2.0.min.js"></script>
+	<script src="./common/jquery.mobile-1.4.5.min.js"></script>
 </head>
 
 <?php  
