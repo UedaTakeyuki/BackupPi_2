@@ -68,8 +68,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   }
 
   // リロード時の二重送信を防ぐために、自分自身に一度 GET を発行する（と、リロードされても POST がでない）
+  // 画面作りのために POST のパラメタを不可して GET
   error_log('['.basename(__FILE__).':'.__LINE__.']'.' *** RELOAD ***');    
-  header("Location: " . $_SERVER['SCRIPT_NAME']);
+  header("Location: " . $_SERVER['SCRIPT_NAME'].'?command='.$command.'&filename='.$filename);
+} else {
+  // GET
+  if(isset($_GET['command'])&&isset($_GET['filename'])){
+    $command = $_GET['command'];
+    $filename = $_GET['filename'];
+  }
 }
 
 #バックアップファイル名（仮）の作成
@@ -233,6 +240,12 @@ show_html_head(TITLE);
       }
     });
   };
+  // ナビゲーションの選択
+<?php if ($command == "restore"): ?>
+  $('#tab2_link')[0].click();
+<?php else: ?>
+  $('#tab1_link')[0].click();
+<?php endif ?>
   call_ajax();
 //  },5000);
   });
@@ -264,8 +277,9 @@ show_html_head(TITLE);
     <!--タブ部分 -->
     <div data-role="navbar" id="main_nav">
         <ul>
-            <li><a href="#tab1" class="ui-btn-active">バックアップ</a></li>
-            <li><a href="#tab2">リストア</a></li>
+            <!-- <li><a href="#tab1" class="ui-btn-active">バックアップ</a></li> -->
+            <li><a href="#tab1" id="tab1_link" class="ui-btn-active">バックアップ</a></li>
+            <li><a href="#tab2" id="tab2_link">リストア</a></li>
             <!-- <li><a href="#tab3">未使用領域のクリア</a></li> -->
         </ul>
     </div>

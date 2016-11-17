@@ -2,7 +2,8 @@
 require_once("common/common.php");
 error_log('['.basename(__FILE__).':'.__LINE__.']'."start");
 // dd コマンドの中断
-$result = `sudo pkill -9 -f dd`;
+#$result = `sudo pkill -9 -f dd`;
+$result = `sudo pkill -9 -f sh -c sudo pkill -USR1 dd`;
 //JSON形式で出力する
 $json['result']=$result;
 
