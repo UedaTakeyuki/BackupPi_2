@@ -77,7 +77,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $output=exec($sh_script,$output2,$retval);
     error_log('['.basename(__FILE__).':'.__LINE__.']'.' $output = '.$output);    
     error_log('['.basename(__FILE__).':'.__LINE__.']'.' $sh_script = '.$sh_script);    
-    error_log('['.basename(__FILE__).':'.__LINE__.']'.' $output2 = '.$output2);    
+    error_log('['.basename(__FILE__).':'.__LINE__.']'.' $output2 = '.$output2[0]);    
     error_log('['.basename(__FILE__).':'.__LINE__.']'.' $retval = '.$retval);    
   }
 
@@ -136,12 +136,14 @@ show_html_head(TITLE);
 
   $(document).ready(function() 
   {
+
     // 正規表現で数値を３桁ずつセパレート
     function separate(num){
       return String(num).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,');
     };
 
     function start_backuprestore(){
+//      same_size_count = 0;
       // バックアップ中、もしくはリストア中なので、他の操作を抑止に
       console.log("start_backuprestore start");
       document.getElementById('command_backup').disabled = true;
@@ -213,7 +215,11 @@ show_html_head(TITLE);
           start_backuprestore();
           document.getElementById("status").innerHTML = 'バックアップ 作成中... ' + separate(data.backup_size) + 'バイト '
             + '<a href="javascript:break_dd();" >中断</a>';// + "<br> p=" + prev_size_of_resultfile + "<br> c=" + size_of_resultfile;
-          if (data.dd_process_exist < 3 && prev_size_of_backuplog == data.backup_size && data.backup_size != 0){
+
+          console.log("data.dd_process_exist = "+data.dd_process_exist);
+          if (prev_size_of_backuplog == data.backup_size){ console.log("*** SAME SIZE ***");}
+          if (data.dd_process_exist < 2){
+//          if (data.dd_process_exist < 3 && prev_size_of_backuplog == data.backup_size && data.backup_size != 0){
             document.getElementById("status").innerHTML = 'バックアップ完了';//+ "<br> p=" + prev_size_of_resultfile + "<br> c=" + size_of_resultfile;
             end_backupresotre();
             //clearInterval(timer1);
@@ -221,6 +227,7 @@ show_html_head(TITLE);
             prev_size_of_backuplog = data.backup_size
             call_ajax();
           }
+       
         }
         if (data.restore_running == "yes\n"){
           console.log("data.restore_running");
@@ -229,7 +236,11 @@ show_html_head(TITLE);
           start_backuprestore();
           document.getElementById("status").innerHTML = '選択ファイルで復元中... ' + separate(data.restore_size) + 'バイト '
             + '<a href="javascript:break_dd();" >中断</a>';// + "<br> p=" + prev_size_of_resultfile + "<br> c=" + size_of_resultfile;
-          if (data.dd_process_exist < 3 && prev_size_of_restorelog == data.restore_size && data.restore_size != 0){
+
+          if (prev_size_of_restorelog == data.restore_size){ console.log("*** SAME SIZE ***");}
+          console.log("data.dd_process_exist = "+data.dd_process_exist);
+//          if (data.dd_process_exist < 3 && prev_size_of_restorelog == data.restore_size && data.restore_size != 0){
+          if (data.dd_process_exist < 2){
             document.getElementById("status").innerHTML = '復元完了';//+ "<br> p=" + prev_size_of_resultfile + "<br> c=" + size_of_resultfile;
             end_backupresotre();
             //clearInterval(timer1);
@@ -237,6 +248,7 @@ show_html_head(TITLE);
             prev_size_of_restorelog = data.restore_size
             call_ajax();
           }
+
         }
       },
       /**

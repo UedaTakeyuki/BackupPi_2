@@ -12,7 +12,9 @@ $dd_backup_file_exist = `$dd_backup_file_exist_command`;
 #$dd_restore_file_exist = `if [ -e /boot/log/dd.restore.log ]; then echo "yes"; else echo "no"; fi`;
 $dd_restore_file_exist_command = 'if [ -e '.DD_RESTORE_LOG.' ]; then echo "yes"; else echo "no"; fi';
 $dd_restore_file_exist = `$dd_restore_file_exist_command`;
-$dd_process_exist = `ps -aef | grep "sudo /bin/dd " | wc -l`;
+$dd_process_exist = `ps -aef | grep "/bin/dd " | grep root | wc -l`;
+$ps_result = `ps -aef | grep "/bin/dd " | grep root `;
+error_log('['.basename(__FILE__).':'.__LINE__.']'."ps_result = ".$ps_result);
 #sleep(9);
 //JSON形式で出力する
 $json['backup_running']=$dd_backup_file_exist;
