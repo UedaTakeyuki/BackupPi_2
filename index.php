@@ -51,6 +51,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       $sh_script = "/bin/gzip -dc /boot/DATA/".$filename." | sudo /bin/dd of=/dev/sda bs=1M 1>&2 2>".DD_RESTORE_LOG." &";
 #      $sh_script = "/bin/gzip -dc /boot/DATA/".$filename." | sudo /bin/dd of=/dev/sda bs=1M 1>&2 2>/boot/log/dd.restore.log &";
       break;
+    case "xz":
+      $sh_script = "/usr/bin/xz -dc /boot/DATA/".$filename." | sudo /bin/dd of=/dev/sda bs=1M 1>&2 2>".DD_RESTORE_LOG." &";
+#      $sh_script = "/bin/gzip -dc /boot/DATA/".$filename." | sudo /bin/dd of=/dev/sda bs=1M 1>&2 2>/boot/log/dd.restore.log &";
+      break;
     case "img":
 #     $sh_script = "sudo dd if=/boot/DATA/".$filename." of=/dev/sda bs=1M > /dev/null 2>&1 &";
       $sh_script = "sudo dd if=/boot/DATA/".$filename." of=/dev/sda bs=1M > ".DD_RESTORE_LOG." 2>&1 &";
@@ -304,7 +308,7 @@ show_html_head(TITLE);
 			<input type="hidden" name="command" id="command_restore" value="restore" />
 			<p>復元ファイル選択:<select name="filename" id="restore_from_file">				
 			<?php
-				foreach(glob('/boot/DATA/{*.img,*.zip,*.gz}',GLOB_BRACE) as $file){
+				foreach(glob('/boot/DATA/{*.img,*.zip,*.gz,*.xz}',GLOB_BRACE) as $file){
 					if(is_file($file)){
 						$filename = basename($file);
 						echo '<option value"'.$filename.'">';
