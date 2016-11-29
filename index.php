@@ -33,6 +33,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 #      $sh_script = "sudo /bin/dd if=/dev/sda bs=1M 2>".DD_BACKUP_LOG." | /bin/gzip --fast > ".$ini['backup_path'].$filename." 2>/dev/null &";
 #      $sh_script = "sudo /bin/dd if=/dev/sda bs=1M 2>/boot/log/dd.backup.log | /bin/gzip --fast > /boot/DATA/".$filename." 2>/dev/null &";
       break;
+    case "xz":
+      $sh_script = "sudo sh -c ". '"'. "/bin/dd if=/dev/sda bs=1M 2>".DD_BACKUP_LOG." | /usr/bin/xz > ".$ini['backup_path'].$filename." 2>/dev/null &".'"';
+#      $sh_script = "sudo /bin/dd if=/dev/sda bs=1M 2>".DD_BACKUP_LOG." | /bin/gzip --fast > ".$ini['backup_path'].$filename." 2>/dev/null &";
+#      $sh_script = "sudo /bin/dd if=/dev/sda bs=1M 2>/boot/log/dd.backup.log | /bin/gzip --fast > /boot/DATA/".$filename." 2>/dev/null &";
+      break;
     case "img":
       $sh_script = "sudo /bin/dd if=/dev/sda of=/boot/DATA/".$filename." bs=1M > ".DD_BACKUP_LOG." 2>&1 &";
 #      $sh_script = "sudo /bin/dd if=/dev/sda of=/boot/DATA/".$filename." bs=1M > /boot/log/dd.backup.log 2>&1 &";
@@ -54,7 +59,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       break;
     case "xz":
       $sh_script = "/usr/bin/xz -dc /boot/DATA/".$filename." | sudo /bin/dd of=/dev/sda bs=1M 1>&2 2>".DD_RESTORE_LOG." &";
-#      $sh_script = "/bin/gzip -dc /boot/DATA/".$filename." | sudo /bin/dd of=/dev/sda bs=1M 1>&2 2>/boot/log/dd.restore.log &";
       break;
     case "img":
 #     $sh_script = "sudo dd if=/boot/DATA/".$filename." of=/dev/sda bs=1M > /dev/null 2>&1 &";
