@@ -2,7 +2,7 @@
 require_once("common/common.php");
 error_log('['.basename(__FILE__).':'.$line.']'."start");
 // dd.backup.log ファイルの存在確認
-$dd_backup_file_remove_command = "rm ".DD_BACKUP_LOG;
+$dd_backup_file_remove_command = "sudo rm ".DD_BACKUP_LOG;
 $dd_backup_file_remove = `$dd_backup_file_remove_command`;
 #$dd_backup_file_remove = `rm /boot/log/dd.backup.log`;
 $dd_restore_file_remove_command = "rm ".DD_RESTORE_LOG;

@@ -29,7 +29,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 #     $sh_script = "sudo /usr/share/nginx/www/zip.sh ".$filename." > /dev/null 2>&1 &";
 #      break;
     case "gz":
-      $sh_script = "sudo /bin/dd if=/dev/sda bs=1M 2>".DD_BACKUP_LOG." | /bin/gzip --fast > ".$ini['backup_path'].$filename." 2>/dev/null &";
+      $sh_script = "sudo sh -c ". '"'. "/bin/dd if=/dev/sda bs=1M 2>".DD_BACKUP_LOG." | /bin/gzip --fast > ".$ini['backup_path'].$filename." 2>/dev/null &".'"';
+#      $sh_script = "sudo /bin/dd if=/dev/sda bs=1M 2>".DD_BACKUP_LOG." | /bin/gzip --fast > ".$ini['backup_path'].$filename." 2>/dev/null &";
 #      $sh_script = "sudo /bin/dd if=/dev/sda bs=1M 2>/boot/log/dd.backup.log | /bin/gzip --fast > /boot/DATA/".$filename." 2>/dev/null &";
       break;
     case "img":
