@@ -314,7 +314,7 @@ show_html_head(TITLE);
 	<h2><p>バックアップ</p></h2>
 		<form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post" data-ajax="false">
 			<input type="hidden" name="command" id="command_backup" value="backup" />
-			<p>保存先ファイル名指定(.img or .gz)：<input type="text" name="filename" id="backup_to_filename" value="<?php echo $bf_name;?>" /></p>
+			<p>保存先ファイル名指定(.img .gz .xz)：<input type="text" name="filename" id="backup_to_filename" value="<?php echo $bf_name;?>" /></p>
 			<input type="submit" id="sub_b_btn" value="バックアップ開始" />
 		</form>
   </div><!-- <div id="tab1"> -->
@@ -327,9 +327,13 @@ show_html_head(TITLE);
 			<?php
 				foreach(glob('/boot/DATA/{*.img,*.zip,*.gz,*.xz}',GLOB_BRACE) as $file){
 					if(is_file($file)){
-						$filename = basename($file);
-						echo '<option value"'.$filename.'">';
-						echo htmlspecialchars($filename);
+						$filename_val = basename($file);
+						echo '<option value"'.$filename_val.'" ';
+            if ($command == "restore" && $filename == $filename_val){
+              echo 'selected="selected"'; 
+            }
+            echo '>';
+						echo htmlspecialchars($filename_val);
 						echo '</option>';
 					}
 				}
