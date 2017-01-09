@@ -314,7 +314,15 @@ show_html_head(TITLE);
 	<h2><p>バックアップ</p></h2>
 		<form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post" data-ajax="false">
 			<input type="hidden" name="command" id="command_backup" value="backup" />
-			<p>保存先ファイル名指定(.img .gz .xz)：<input type="text" name="filename" id="backup_to_filename" value="<?php echo $bf_name;?>" /></p>
+      <?php
+        if ($command == "backup" && isset($filename)){
+          $backup_file_name = $filename; 
+        } else {
+          $backup_file_name = $bf_name;
+        }
+      ?>
+			<!-- <p>保存先ファイル名指定(.img .gz .xz)：<input type="text" name="filename" id="backup_to_filename" value="<?php echo $bf_name;?>" /></p> -->
+      <p>保存先ファイル名指定(.img .gz .xz)：<input type="text" name="filename" id="backup_to_filename" value="<?= $backup_file_name;?>" /></p>
 			<input type="submit" id="sub_b_btn" value="バックアップ開始" />
 		</form>
   </div><!-- <div id="tab1"> -->
