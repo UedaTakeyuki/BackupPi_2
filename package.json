@@ -1,0 +1,30 @@
+{
+  "name": "BackupPi_2",
+  "version": "0.0.0",
+  "description": "Backing up and Restoring your Raspberry Pi's SD Card using Raspberry Pi.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/UedaTakeyuki/BackupPi_2.git"
+  },
+  "keywords": [
+    "backup",
+    "RaspberryPi",
+    "OS",
+    "image"
+  ],
+  "author": "Takeyuki UEDA",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/UedaTakeyuki/BackupPi_2/issues"
+  },
+  "devDependencies": {
+    "jquery": "^1.9.1"
+  },
+  "dependencies": {
+    "jquery-mobile": "^1.4.1"
+  }
+}
