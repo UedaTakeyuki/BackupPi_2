@@ -22,9 +22,9 @@
     "url": "https://github.com/UedaTakeyuki/BackupPi_2/issues"
   },
   "devDependencies": {
-    "jquery": "^1.9.1"
+    "jquery": "1.9.1"
   },
   "dependencies": {
-    "jquery-mobile": "^1.4.1"
+    "jquery-mobile": "1.4.1"
   }
 }
