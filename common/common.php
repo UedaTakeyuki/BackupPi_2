@@ -64,6 +64,7 @@ function show_html_head($title) {
 	<script src="./common/jquery.mobile-1.4.5.min.js"></script> -->
 	<link rel="stylesheet" href="node_modules/jquery-mobile/dist/jquery.mobile.min.css" />
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="node_modules/jquery-migrate/dist/jquery-migrate.min.js"></script>
 	<script src="node_modules/jquery-mobile/dist/jquery.mobile.min.js"></script>
 </head>
 
